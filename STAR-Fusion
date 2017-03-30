@@ -234,7 +234,7 @@ main: {
         }
         
         $pipeliner->add_commands(Command->new($cmd, "star.ok"));
-	$pipeliner->add_commands(Command->new("samtools sort Aligned.out.bam -o Aligned.sortedByCoord.out.bam -O BAM -@ $CPU","samtools_sort_star.ok"));
+	$pipeliner->add_commands(Command->new("samtools sort Aligned.out.bam -o Aligned.sortedByCoord.out.bam -O BAM -@ $CPU; rm Aligned.out.bam","samtools_sort_star.ok"));
     }
     
     ## predict fusions
