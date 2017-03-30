@@ -219,7 +219,7 @@ main: {
             . " --runThreadN $CPU"
             . " --limitBAMsortRAM 31532137230 "
             . " --outSAMstrandField intronMotif "
-            . " --outSAMtype BAM SortedByCoordinate ";
+            . " --outSAMtype BAM Unsorted ";
         
         if ($USE_SHARED_MEMORY) {
             $cmd .= " --genomeLoad LoadAndKeep ";
@@ -234,6 +234,7 @@ main: {
         }
         
         $pipeliner->add_commands(Command->new($cmd, "star.ok"));
+	$pipeliner->add_commands(Command->new("samtools sort Aligned.out.bam -o Aligned.sortedByCoord.out.bam -O BAM -@ $CPU","samtools_sort_star.ok"));
     }
     
     ## predict fusions
